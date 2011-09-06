@@ -54,6 +54,20 @@
     <project.build.java.target>1.6</project.build.java.target>
   </properties>
 
+  <distributionManagement>
+
+    <repository>
+      <id>ReleasesM2</id>
+      <url>http://qdsnexus.qg.com/nexus/content/repositories/ReleasesM2</url>
+    </repository>
+
+    <snapshotRepository>
+      <id>qds_internal_snapshots</id>
+      <url>http://qdsnexus.qg.com/nexus/content/repositories/qds_internal_snapshots</url>
+    </snapshotRepository>
+
+  </distributionManagement>
+
   <build>
     <!-- To define the plugin version in your parent POM -->
     <pluginManagement>
