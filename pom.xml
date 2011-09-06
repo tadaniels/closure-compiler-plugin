@@ -33,9 +33,9 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git@github.com:tadaniels/closure-compiler-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:tadaniels/closure-compiler-plugin.git</developerConnection>
-    <url>git@github.com:tadaniels/closure-compiler-plugin.git</url>
+    <connection>scm:git:https://tadaniels@github.com/tadaniels/closure-compiler-plugin.git</connection>
+    <developerConnection>scm:git:https://tadaniels@github.com/tadaniels/closure-compiler-plugin.git</developerConnection>
+    <url>https://tadaniels@github.com/tadaniels/closure-compiler-plugin.git</url>
   </scm>
   <developers>
     <developer>
