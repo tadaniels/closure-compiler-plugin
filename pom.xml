@@ -33,7 +33,7 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:ssh://github.com:tadaniels/closure-compiler-plugin.git</connection>
+    <connection>scm:git:ssh://github.com/closure-compiler-plugin.git</connection>
     <developerConnection>scm:git:ssh://git@github.com:tadaniels/closure-compiler-plugin.git</developerConnection>
     <url>https://tadaniels@github.com/tadaniels/closure-compiler-plugin.git</url>
   </scm>
