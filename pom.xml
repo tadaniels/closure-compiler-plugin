@@ -21,10 +21,10 @@
   <groupId>com.google.javascript</groupId>
   <artifactId>closure-compiler-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>Google closure compiler Plugin</name>
   <description>A plugin to provide maven project access to the Google closure compiler for JavaScript validation and compilation.</description>
-  <url>https://github.com/hoshposh/closure-compiler-plugin/</url>
+  <url>https://github.com/tadaniels/closure-compiler-plugin/</url>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -33,15 +33,20 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:git://github.com/hoshposh/closure-compiler-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:hoshposh/closure-compiler-plugin.git</developerConnection>
-    <url>git@github.com:hoshposh/closure-compiler-plugin.git</url>
+    <connection>scm:git@github.com:tadaniels/closure-compiler-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:tadaniels/closure-compiler-plugin.git</developerConnection>
+    <url>git@github.com:tadaniels/closure-compiler-plugin.git</url>
   </scm>
   <developers>
     <developer>
       <id>hoshposh</id>
       <name>Lyndon Washington</name>
       <email>hoshposh@crazy-code.com</email>
+    </developer>
+    <developer>
+      <id>tadaniels</id>
+      <name>Terrance Daniels</name>
+      <email>tadaniels@gmail.com</email>
     </developer>
   </developers>
   
