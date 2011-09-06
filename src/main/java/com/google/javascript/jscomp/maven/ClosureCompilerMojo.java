@@ -15,6 +15,12 @@
  */
 package com.google.javascript.jscomp.maven;
 
+import com.google.javascript.jscomp.*;
+import com.google.javascript.jscomp.Compiler;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.project.MavenProject;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,19 +28,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.project.MavenProject;
-import org.apache.tools.ant.DirectoryScanner;
-
-import com.google.javascript.jscomp.CompilationLevel;
-import com.google.javascript.jscomp.Compiler;
-import com.google.javascript.jscomp.CompilerOptions;
-import com.google.javascript.jscomp.JSSourceFile;
-import com.google.javascript.jscomp.Result;
-import com.google.javascript.jscomp.SourceFile;
-import com.google.javascript.jscomp.WarningLevel;
 
 /**
  * Compile and validate javascript files with Google closure compiler tool.
@@ -137,6 +130,7 @@ public class ClosureCompilerMojo extends AbstractMojo
 
     private File m_outputFile;
     private JSSourceFile[] m_jsFiles;
+    private String externJsFile;
 
     @Override
     public void execute() throws MojoExecutionException
@@ -165,7 +159,6 @@ public class ClosureCompilerMojo extends AbstractMojo
     /**
      * process closure compiler on javascript files found in folder hierarchy (by default "/target" under basedir)
      *
-     * @param jsBasedir
      * @throws MojoExecutionException Thrown if the compilation of Javascript fails
      */
     private void processCompilerOnJavascripts() throws MojoExecutionException
@@ -221,17 +214,23 @@ public class ClosureCompilerMojo extends AbstractMojo
         WarningLevel wLevel = convertStringToEnumValue(WarningLevel.class, warningLevel);
         wLevel.setOptionsForWarningLevel(options);
 
-        Result result = compiler.compile(new JSSourceFile[]{}, m_jsFiles, options);
+        Result result = compiler.compile(getExternJsFiles(), m_jsFiles, options);
         if (!result.success) {
             throw new MojoExecutionException("Javascript compilation failed.");
         }
         return compiler.toSource();
     }
 
+    private JSSourceFile[] getExternJsFiles()
+    {
+        if ( externJsFile != null && !externJsFile.trim().equals( "" ) )
+            return new JSSourceFile[]{ JSSourceFile.fromFile(externJsFile) };
+        return new JSSourceFile[ 0 ];
+    }
+
     /**
      * If {@link #writeCompiledCode} is set to true, try to write compiled code to the target file
      *
-     * @param m_jsFiles array of javascript files given to compiler
      * @param jsCompiledCode array of compiled code (in the same order than jsFiles).
      */
     private void writeJsCompiledFile(String jsCompiledCode)
@@ -262,20 +261,20 @@ public class ClosureCompilerMojo extends AbstractMojo
      */
     private JSSourceFile[] findJavascriptFiles()
     {
-        DirectoryScanner ds = new DirectoryScanner();
-        ds.setBasedir(resourceDirectory);
-        if (includes != null && includes.length > 0) {
-            ds.setIncludes(includes);
-        }
-        if (excludes != null && excludes.length > 0) {
-            ds.setExcludes(excludes);
-        }
-        ds.scan();
-        String[] filesFound = ds.getIncludedFiles();
+        //DirectoryScanner ds = new DirectoryScanner();
+        //ds.setBasedir(resourceDirectory);
+        //if (includes != null && includes.length > 0) {
+        //    ds.setIncludes(includes);
+        //}
+        //if (excludes != null && excludes.length > 0) {
+        //    ds.setExcludes(excludes);
+        //}
+        //ds.scan();
+        //String[] filesFound = ds.getIncludedFiles();
 
         List<SourceFile> v = new ArrayList<SourceFile>();
-        if (null != filesFound) {
-            for (String jsFile : filesFound) {
+        if (null != includes) {
+            for (String jsFile : includes) {
                 v.add(JSSourceFile.fromFile(resourceDirectory + File.separator + jsFile));
             }
         }
